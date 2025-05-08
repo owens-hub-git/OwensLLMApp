@@ -8,17 +8,19 @@
     tools:context=".MainActivity">
 
     <!-- ListView for displaying quiz items -->
+
     <ListView
         android:id="@+id/listView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="30dp"
+        android:background="@android:color/transparent"
+        android:clipToPadding="false"
         android:divider="@android:color/darker_gray"
-        android:dividerHeight="1dp"
+        android:dividerHeight="8dp"
         android:paddingTop="8dp"
         android:paddingBottom="8dp"
-        android:clipToPadding="false"
-        android:scrollbarStyle="outsideOverlay"
-        android:background="@android:color/transparent" />
+        android:scrollbarStyle="outsideOverlay" />
 
     <!-- Loading Container -->
     <LinearLayout

@@ -1,6 +1,6 @@
 # Running the code:
 1. First run the backend code.
-2. Clone the repo to Andriod Studio
+2. Clone the repo to Android Studio
 3. Let all files/gradle setup finish.
 4. Run as normal android app.
 

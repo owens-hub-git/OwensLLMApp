@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SignUpActivity">
+
+    <EditText
+        android:id="@+id/signUpUsernameEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="129dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="35dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Username"
+        app:layout_constraintBottom_toTopOf="@+id/signUpPasswordEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/signUpPasswordEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="141dp"
+        android:layout_marginBottom="43dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Password"
+        app:layout_constraintBottom_toTopOf="@+id/confirmEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpUsernameEditText" />
+
+    <EditText
+        android:id="@+id/confirmEditText"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="63dp"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginBottom="24dp"
+        android:ems="10"
+        android:inputType="text"
+        android:hint="Confirm Password"
+        app:layout_constraintBottom_toTopOf="@+id/signUpSaveButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/signUpPasswordEditText" />
+
+    <Button
+        android:id="@+id/signUpSaveButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="68dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="255dp"
+        android:layout_marginBottom="279dp"
+        android:text="Save"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/confirmEditText" />
+
+    <Button
+        android:id="@+id/backLoginButton"
+        style="@style/Widget.AppCompat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="305dp"
+        android:layout_marginBottom="53dp"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/signUpUsernameEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

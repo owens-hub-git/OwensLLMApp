@@ -1,9 +1,11 @@
 package com.example.llmexample;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -27,10 +29,13 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> quizItems;
     private ArrayAdapter<String> adapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         // Initialize UI components
         listView = findViewById(R.id.listView);
@@ -39,8 +44,26 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, quizItems);
         listView.setAdapter(adapter);
 
+
         // URL for the Flask server
-        String url = "http://10.0.2.2:5000/getQuiz?topic=Movies";
+        //String url = "http://10.0.2.2:5000/getQuiz?topic=Books";
+
+        SharedPreferences prefs = getSharedPreferences("AppPrefs", MODE_PRIVATE);
+        String selectedTopic = prefs.getString("preferred_topic", "Books");
+
+        String topicParam;
+        switch (selectedTopic) {
+            case "Books": topicParam = "books"; break;
+            case "Movies": topicParam = "movies"; break;
+            case "Science": topicParam = "science"; break;
+            case "History": topicParam = "history"; break;
+            case "Technology": topicParam = "tech"; break;
+            case "Music": topicParam = "music"; break;
+            default: topicParam = "books"; break;
+        }
+        String url = "http://10.0.2.2:5000/getQuiz?topic=" + topicParam;
+
+
         RequestQueue queue = Volley.newRequestQueue(this);
 
         // Create the JSON Object Request
@@ -53,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
                         try {
                             Log.i(TAG, "Response received: " + response.toString());
+                            if (!response.has("quiz")) {
+                                Log.e(TAG, "No quiz key in response: " + response.toString());
+                                Toast.makeText(MainActivity.this, "Server error: " + response.optString("error"), Toast.LENGTH_LONG).show();
+                                return;
+                            }
                             JSONArray quizArray = response.getJSONArray("quiz");
 
                             // Clear previous quiz items
@@ -109,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Set a custom retry policy with a longer timeout
         jsonObjectRequest.setRetryPolicy(new DefaultRetryPolicy(
-                10000, // 10-second timeout (adjust as needed)
+                150_000, // 80-second timeout (adjust as needed)
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES, // 1 retry
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT // Default backoff multiplier
         ));
@@ -120,5 +148,6 @@ public class MainActivity extends AppCompatActivity {
         // Add the request to the queue
         Log.i(TAG, "Sending request to: " + url);
         queue.add(jsonObjectRequest);
+
     }
 }
